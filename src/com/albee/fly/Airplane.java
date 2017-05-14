@@ -14,7 +14,7 @@ public class Airplane extends  FlyingObject implements  Enemy {
         this.height = this.image.getHeight();
         this.y = -this.height;
         Random rand = new Random();
-        this.x = rand.nextInt(400 - this.width);
+        this.x = rand.nextInt(ShootGame.WIDTH - this.width);
     }
 
     public int getScore() {
@@ -22,7 +22,7 @@ public class Airplane extends  FlyingObject implements  Enemy {
     }
 
     public boolean outOfBounds() {
-        return this.y > 654;
+        return this.y > ShootGame.HEIGHT;
     }
 
     public void step() {

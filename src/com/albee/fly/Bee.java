@@ -17,7 +17,7 @@ public class Bee extends FlyingObject implements  Award{
         this.height = this.image.getHeight();
         this.y = -this.height;
         Random rand = new Random();
-        this.x = rand.nextInt(400 - this.width);
+        this.x = rand.nextInt(ShootGame.WIDTH - this.width);
         this.awardType = rand.nextInt(2);
     }
 
@@ -26,13 +26,13 @@ public class Bee extends FlyingObject implements  Award{
     }
 
     public boolean outOfBounds() {
-        return this.y > 654;
+        return this.y > ShootGame.HEIGHT;
     }
 
     public void step() {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
-        if(this.x > 400 - this.width) {
+        if(this.x > ShootGame.WIDTH - this.width) {
             this.xSpeed = -1;
         }
 
