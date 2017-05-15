@@ -12,17 +12,37 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Timer;
 import java.util.TimerTask;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  * Created by Albee on 2017/5/13.
  */
 public class ShootGame extends JPanel {
+
+
+  public static void main(String[] args) {
+    System.out.println("交流学习，谢谢关注 知乎专栏：小仙女Albee  微信 K2Romm");
+    SwingUtilities.invokeLater(ShootGame::run);
+  }
+
+  private static void run() {
+    JFrame frame = new JFrame("Albee");
+    ShootGame game = new ShootGame();
+    frame.add(game);
+    frame.setSize(WIDTH, HEIGHT);
+    frame.setAlwaysOnTop(true);
+    frame.setDefaultCloseOperation(3);
+    frame.setIconImage((new ImageIcon("images/icon.jpg")).getImage());
+    frame.setLocationRelativeTo((Component) null);
+    frame.setVisible(true);
+    game.action();
+  }
 
   public static final int WIDTH = 400;
 
@@ -152,22 +172,6 @@ public class ShootGame extends JPanel {
 
   }
 
-  public static void main(String[] args) {
-
-    System.out.println("交流学习，谢谢关注 知乎专栏：小仙女Albee  微信 K2Romm");
-
-    JFrame frame = new JFrame("Albee");
-    ShootGame game = new ShootGame();
-    frame.add(game);
-    frame.setSize(WIDTH, HEIGHT);
-    frame.setAlwaysOnTop(true);
-    frame.setDefaultCloseOperation(3);
-    frame.setIconImage((new ImageIcon("images/icon.jpg")).getImage());
-    frame.setLocationRelativeTo((Component) null);
-    frame.setVisible(true);
-    game.action();
-  }
-
   public void action() {
 
     MouseAdapter l = new MouseAdapter() {
@@ -219,10 +223,7 @@ public class ShootGame extends JPanel {
     };
     this.addMouseListener(l);
     this.addMouseMotionListener(l);
-    this.timer = new Timer();
-    this.timer.schedule(new TimerTask() {
-
-      public void run() {
+    this.timer = new Timer(this.intervel, actionEvent -> {
 
         if (ShootGame.this.state == 1) {
           ShootGame.this.enterAction();
@@ -234,8 +235,7 @@ public class ShootGame extends JPanel {
         }
 
         ShootGame.this.repaint();
-      }
-    }, (long) this.intervel, (long) this.intervel);
+    });
   }
 
   public void enterAction() {
