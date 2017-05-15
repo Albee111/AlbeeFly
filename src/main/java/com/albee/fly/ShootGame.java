@@ -236,6 +236,7 @@ public class ShootGame extends JPanel {
 
         ShootGame.this.repaint();
     });
+    timer.start();
   }
 
   public void enterAction() {
